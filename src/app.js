@@ -1,7 +1,13 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
-// Middleware
+// CORS fix
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://school-management-1-by36.onrender.com'],
+  credentials: true
+}));
+
 app.use(express.json());
 
 // Routes
@@ -19,7 +25,6 @@ app.use('/api/attendance', attendanceRoutes);
 app.use('/api/results', resultRoutes);
 app.use('/api/notices', noticeRoutes);
 
-// Test route
 app.get('/', (req, res) => {
   res.json({ message: 'School Management API is running' });
 });
